@@ -1,0 +1,31 @@
+<html lang="en">
+
+<body>
+    <div id='app'></div>
+    <script src="../dist/index.js" ></script>
+    <script>
+        const App = {
+            // 视图
+            template: `
+                <input v-model="message"/>
+                <button @click='click'>{{message}}</button>
+            `,
+            data() {
+                return {
+                    message: 'Hello Vue 3!!'
+                }
+            },
+            methods: {
+                click() {
+                    this.message = this.message.split('').reverse().join('')
+                }
+            }
+        }
+        const {
+            createApp
+        } = Vue
+        createApp(App).mount('#app')
+    </script>
+</body>
+
+</html>
