@@ -34,14 +34,6 @@ npm install rollup -d
 npm i rollup-plugin-typescript2 -d
 ```
 
-
-
-
-
-
-
-
-
 ### 初始化tsc
 
 #### 安装typescript包

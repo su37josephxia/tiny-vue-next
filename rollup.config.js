@@ -4,8 +4,10 @@ import typescript from 'rollup-plugin-typescript2';
 export default {
   input: 'package/vue/index.ts',
   output: {
-    file: 'package/vue/dist/runtime.js',
-    format: 'iife',
+    file: 'package/vue/dist/index.js',
+    // format: 'iife',
+    name: 'Vue',
+    format:'umd'
   },
   plugins: [
     typescript(/*{ plugin options }*/)
