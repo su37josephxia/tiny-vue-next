@@ -39,7 +39,7 @@ npm i rollup-plugin-typescript2 -d
 #### 安装typescript包
 
 ```bash
-npm i typescript ts-node-dev @types/node -d
+npm i typescript ts-node-dev @types/node @types/jest -d
 ```
 
 #### 创建tsconfig.json文件
@@ -78,3 +78,42 @@ echo 'console.log("helloworld")' >> src/index.ts
     "build": "tsc -P tsconfig.json",
 }
 ```
+
+
+
+### Jest测试
+
+#### 安装jest库
+
+```bash
+npm install jest ts-jest @types/jest -d
+```
+
+#### 创建jest.config.json文件
+
+```
+{
+  "transform": {
+    "^.+\\.(t|j)sx?$": "ts-jest"
+  },
+  "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
+}
+复制代码
+```
+
+#### package.json里的 scripts 下的 test
+
+```
+{
+  "scripts": {
+    "test": "jest --config jestconfig.json --coverage",
+  }
+}
+复制代码
+```
+
+#### 
+
+
+

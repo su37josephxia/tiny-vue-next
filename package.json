@@ -8,7 +8,9 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "serve": "rollup -c --watch"
+    "serve": "rollup -c --watch",
+    "coverage": "jest --config jestconfig.json --coverage",
+    "test": "jest --config jestconfig.json "
   },
   "repository": {
     "type": "git",
@@ -23,7 +25,9 @@
   "homepage": "https://github.com/su37josephxia/tiny-vue-next#readme",
   "dependencies": {
     "@types/jest": "^26.0.4",
+    "jest": "^26.1.0",
     "rollup": "^2.16.1",
-    "rollup-plugin-typescript2": "^0.27.1"
+    "rollup-plugin-typescript2": "^0.27.1",
+    "ts-jest": "^26.1.3"
   }
 }
