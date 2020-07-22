@@ -5,10 +5,10 @@
     <script>
         const Vue = {
             createApp(config) {
-                const compile = (template) => {
+                const compile = (config) => {
                     // AST parse
                     // const ast = parse(template)
-                    const parse = template => ({
+                    const parser = template => ({
                         children: [{
                                 tag: 'input',
                                 props: {
@@ -59,9 +59,11 @@
                         ],
                     })
 
-                    const generator = ast => (observed, dom) => {
+                    const generator = (ast,methods) => (observed, dom) => {
                         // 重新渲染
+                        // 输入框
                         let input = dom.querySelector('input')
+                        // 绑定事件
                         if (!input) {
                             input = document.createElement('input')
                             input.setAttribute('value', observed.message)
@@ -70,22 +72,33 @@
                             })
                             dom.appendChild(input)
                         }
+                        // 绑定数据
+                        input.value = observed.message
+
+                        // 按钮
                         let button = dom.querySelector('button')
                         if (!button) {
                             console.log('create button')
                             button = document.createElement('button')
                             button.addEventListener('click', () => {
-                                return config.methods.click.apply(observed)
+                                return methods.click.apply(observed)
                             })
                             dom.appendChild(button)
                         }
                         button.innerText = observed.message
                     }
 
+                    //  模板字符串 -> AST(Abstract Syntax Treee)抽象语法树
+                    let ast = parser(config.template)
+                    // 转换处理 譬如 v-bind v-if v-for的转换
+                    ast = transfer(ast)
+                    // AST -> 渲染函数
+                    return generator(ast,config.methods)
+
                 }
 
                 // 生成渲染函数
-                const render = compile()
+                const render = compile(config)
 
                 // 定义响应函数
                 let effective

@@ -1,4 +1,4 @@
-module.exports.createCompiler = ({ parser, transfer, generator }) => (template) => {
+module.exports.createCompiler = ({ parser, transfer, generator }) => (template,method) => {
     //  模板字符串 -> AST(Abstract Syntax Treee)抽象语法树
     let ast = parser(template)
     // 转换处理 譬如 v-bind v-if v-for的转换

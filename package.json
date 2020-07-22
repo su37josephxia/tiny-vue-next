@@ -9,8 +9,10 @@
   "scripts": {
     "build": "rollup -c",
     "serve": "rollup -c --watch",
-    "coverage": "jest --config jestconfig.json --coverage",
-    "test": "jest --config jestconfig.json "
+    "test:coverage": "jest --config jest.config.js --coverage",
+    "test:watch": "jest --config jest.config.js --watch",
+    "test": "jest --config jest.config.js "
+    
   },
   "repository": {
     "type": "git",
