@@ -8,7 +8,8 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "serve": "rollup -c --watch",
+    "dev": "rollup -c --watch",
+    "demo": "live-server",
     "test:coverage": "jest --config jest.config.js --coverage",
     "test:watch": "jest --config jest.config.js --watch",
     "test": "jest --config jest.config.js "
