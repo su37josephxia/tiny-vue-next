@@ -1,35 +1,36 @@
-<html lang="en">
-
-<body>
-    <div id='app'>
-        <input />
-        <button></button>
-    </div>
-    <script>
-        const data = {
-            message: 'Hello Vue 3!!'
-        }
-
-        function update() {
-            // 更新视图
-            document.querySelector('button').innerHTML = data.message
-            document.querySelector('input').value = data.message
-        }
-
-        document.querySelector('input').addEventListener('keyup', function () {
-            data.message = this.value
-            update()
-        })
-
-        document.querySelector('button').addEventListener('click', function () {
-            data.message = data.message.split('').reverse().join('')
-            update()
-        })
-
-        // 初始化
-        update()
-    </script>
-
-</body>
-
+<html>
+  <div id="app">
+    <input />
+    <button></button>
+  </div>
 </html>
+<script>
+  const data = {
+    message: "Hello Vue 3!!",
+  };
+
+  function update() {
+    // 更新视图
+    document.querySelector("button").innerHTML = data.message;
+    document.querySelector("input").value = data.message;
+  }
+
+  // 首次数据渲染
+  render();
+
+  document.querySelector("button").addEventListener("click", function () {
+    data.message = data.message.split("").reverse().join("");
+
+    // 重新渲染
+    render();
+  });
+
+  document.querySelector('input').addEventListener('keyup', function () {
+    data.message = this.value
+    
+    // 重新渲染
+    render()
+})
+
+
+</script>
