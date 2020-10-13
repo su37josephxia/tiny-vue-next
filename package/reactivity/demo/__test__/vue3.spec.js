@@ -42,8 +42,10 @@ describe('reactivity/vue3', () => {
         // 设置响应函数
         effect(fn)
 
-        // 改变多层数据
-        data.age.n = 1
+        // 改变多层数据 // get('age') => proxy(age) set('n')
+        data.age.n = 1 
+        // 不是代理 是数据本 {}
+        // 需要返回 proxy(age)
 
         // 确认fn生效
         expect(fn).toBeCalled()

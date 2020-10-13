@@ -3,50 +3,43 @@
 //     effect
 // } = require('../../packages/reactivity/index')
 
-let effective
+let effective;
 function effect(fun) {
-    effective = fun
+  effective = fun;
 }
 
 function reactive(data) {
-    if (typeof data !== 'object' || data === null) {
-        return data
+  if (typeof data !== "object" || data === null) {
+    return data;
+  }
+
+  const observed = new Proxy(data, {
+    get(target, key, receiver) {
+      let result = Reflect.get(target, key, receiver);
+      return typeof result !== 'object' ? result : reactive(result)
+    },
+
+    set(target,key,value,receiver){
+        effective()
+        const ret = Reflect.set(target,key,value,receiver)
+        return ret
+    },
+
+    deleteProperty(target,key){
+        effective()
+        const ret = Reflect.deleteProperty(target,key)
+        return ret
     }
-    const observed = new Proxy(data, {
-        get(target, key, receiver) {
-            // 普通写法
-            // return target[key]
-            // proxy + reflect 反射
-            // Reflect有返回值不报错
-            let result = Reflect.get(target, key, receiver)
 
-            // return result
-            // 多层代理
-            return typeof result !== 'object' ? result : reactive(result) 
-        },
-        set(target, key, value, receiver) {
-            effective()
-            // 普通写法
-            // target[key] = value // 如果设置不成功 没有返回
-            // proxy + reflect
-            const ret = Reflect.set(target, key, value, receiver)
-            return ret
-        },
+  });
 
-        deleteProperty(target,key){
-            const ret = Reflect.deleteProperty(target,key)
-            return ret
-        }
-
-    })
-    return observed
+  return observed;
 }
 
 module.exports = {
-    reactive, effect
-}
-
-
+  reactive,
+  effect,
+};
 
 // // 设置数据响应
 // const data = reactive({
